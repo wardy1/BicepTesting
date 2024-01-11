@@ -322,7 +322,7 @@ resource virtualNetworkGateway 'Microsoft.Network/virtualNetworkGateways@2023-04
   ]
 }
 
-module virtualNetworkGateway_natRules 'nat-rule/main.bicep' = [for (natRule, index) in natRules: {
+module virtualNetworkGateway_natRules './nat-rule/main.bicep' = [for (natRule, index) in natRules: {
   name: '${deployment().name}-NATRule-${index}'
   params: {
     name: natRule.name
