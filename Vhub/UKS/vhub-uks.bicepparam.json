@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "uksvhub1"
+        },
+        "location": {
+            "value": "uksouth"
+        },
+        "tags": {
+            "value": {
+                "environment": "production",
+                "costCenter": "it"
+            }
+        },
+        "addressPrefix": {
+            "value": "10.100.1.0/24"
+        },
+        "allowBranchToBranchTraffic": {
+            "value": true
+        },
+        "expressRouteGatewayId": {
+            "value": ""
+        },
+        "p2SVpnGatewayId": {
+            "value": ""
+        },
+        "preferredRoutingGateway": {
+            "value": "None"
+        },
+        "routeTableRoutes": {
+            "value": []
+        },
+        "securityPartnerProviderId": {
+            "value": ""
+        },
+        "securityProviderName": {
+            "value": ""
+        },
+        "sku": {
+            "value": "Standard"
+        },
+        "virtualHubRouteTableV2s": {
+            "value": []
+        },
+        "virtualRouterAsn": {
+            "value": -1
+        },
+        "virtualRouterIps": {
+            "value": []
+        },
+        "virtualWanId": {
+            "value": "/subscriptions/5e0b33cf-2cfb-487b-ac44-f9877e08edb8/resourceGroups/rg-vwantest/providers/Microsoft.Network/virtualWans/uksvwan1"
+        }
+    }
+}
