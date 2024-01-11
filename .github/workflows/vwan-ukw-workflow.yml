@@ -1,5 +1,5 @@
-name: deploy-vwan-uks
-concurrency: vwan-uks
+name: deploy-vwan-ukw
+concurrency: vwan-ukw
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
         deploymentName: ${{ github.run_number }}
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
         template: ./Vwan/main.bicep
-        parameters: ./Vwan/UKS/vwan-uks.bicepparam.json
+        parameters: ./Vwan/UKW/vwan-ukw.bicepparam.json
         deploymentMode: Validate
 
   preview:
@@ -61,7 +61,7 @@ jobs:
         failOnStdErr: false
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
         template: ./Vwan/main.bicep
-        parameters: ./Vwan/UKS/vwan-uks.bicepparam.json
+        parameters: ./Vwan/UKW/vwan-ukw.bicepparam.json
         additionalArguments: --what-if
 
   deploy:
@@ -87,4 +87,4 @@ jobs:
         deploymentName: ${{ github.run_number }}
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
         template: ./Vwan/main.bicep
-        parameters: ./Vwan/UKS/vwan-uks.bicepparam.json
+        parameters: ./Vwan/UKW/vwan-ukw.bicepparam.json
