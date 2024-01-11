@@ -1,5 +1,5 @@
-name: deploy-toy-website-test
-concurrency: toy-company
+name: deploy-vwan-uks
+concurrency: vwan-uks
 
 on:
   push:
@@ -11,8 +11,8 @@ permissions:
   contents: read
 
 env:
-  AZURE_RESOURCEGROUP_NAME: rg-bicepvalidate
-  ENVIRONMENT_TYPE: Test
+  AZURE_RESOURCEGROUP_NAME: rg-vwantest
+  ENVIRONMENT_TYPE: Production
 
 jobs:
   lint:
@@ -20,7 +20,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Run Bicep linter
-      run: az bicep build --file deploy/main.bicep
+      run: az bicep build --file vwan/main.bicep
+
   validate:
     runs-on: ubuntu-latest
     steps:
@@ -84,18 +85,3 @@ jobs:
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
         template: ./deploy/main.bicep
         parameters: environmentType=${{ env.ENVIRONMENT_TYPE }}
-
-  smoke-test:
-    runs-on: ubuntu-latest
-    needs: deploy
-    steps:
-    - uses: actions/checkout@v3
-    - run: |
-        $container = New-PesterContainer `
-          -Path 'deploy/Website.Tests.ps1' `
-          -Data @{ HostName = '${{needs.deploy.outputs.appServiceAppHostName}}' }
-        Invoke-Pester `
-          -Container $container `
-          -CI
-      name: Run smoke tests
-      shell: pwsh
