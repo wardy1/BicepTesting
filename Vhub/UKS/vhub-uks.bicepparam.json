@@ -27,7 +27,7 @@
             "value": ""
         },
         "preferredRoutingGateway": {
-            "value": "None"
+            "value": ""
         },
         "routeTableRoutes": {
             "value": []
