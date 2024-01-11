@@ -63,22 +63,22 @@ param virtualWanId string
 
 @description('Optional. Resource ID of the VPN Gateway to link to.')
 param vpnGatewayId string = ''
-
+/* 
 @description('Optional. Route tables to create for the virtual hub.')
 param hubRouteTables array = []
 
 @description('Optional. Virtual network connections to create for the virtual hub.')
-param hubVirtualNetworkConnections array = []
+param hubVirtualNetworkConnections array = [] */
 
 @description('Optional. The lock settings of the service.')
 param lock lockType
 
 @description('Optional. Enable telemetry via a Globally Unique Identifier (GUID).')
 param enableDefaultTelemetry bool = true
+/* 
+var enableReferencedModulesTelemetry = false */
 
-var enableReferencedModulesTelemetry = false
-
-resource defaultTelemetry 'Microsoft.Resources/deployments@2021-04-01' = if (enableDefaultTelemetry) {
+/* resource defaultTelemetry 'Microsoft.Resources/deployments@2021-04-01' = if (enableDefaultTelemetry) {
   name: 'pid-47ed15a6-730a-4827-bcb4-0fd963ffbd82-${uniqueString(deployment().name, location)}'
   properties: {
     mode: 'Incremental'
@@ -88,7 +88,7 @@ resource defaultTelemetry 'Microsoft.Resources/deployments@2021-04-01' = if (ena
       resources: []
     }
   }
-}
+} */
 
 resource virtualHub 'Microsoft.Network/virtualHubs@2022-11-01' = {
   name: name
