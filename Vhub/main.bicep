@@ -73,8 +73,8 @@ param hubVirtualNetworkConnections array = [] */
 @description('Optional. The lock settings of the service.')
 param lock lockType
 
-@description('Optional. Enable telemetry via a Globally Unique Identifier (GUID).')
-param enableDefaultTelemetry bool = true
+/* @description('Optional. Enable telemetry via a Globally Unique Identifier (GUID).')
+param enableDefaultTelemetry bool = true */
 /* 
 var enableReferencedModulesTelemetry = false */
 
