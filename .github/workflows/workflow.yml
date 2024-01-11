@@ -57,6 +57,7 @@ jobs:
         failOnStdErr: false
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
         template: ./Vwan/main.bicep
+        param_file: ./Vwan/uks/vwan-uks.biceparam.json
         additionalArguments: --what-if
 
   deploy:
