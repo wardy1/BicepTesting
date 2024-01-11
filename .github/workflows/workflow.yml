@@ -37,7 +37,7 @@ jobs:
       with:
         deploymentName: ${{ github.run_number }}
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
-        template: ./deploy/main.bicep
+        template: ./Vwan/main.bicep
         parameters: environmentType=${{ env.ENVIRONMENT_TYPE }}
         deploymentMode: Validate
 
@@ -57,14 +57,11 @@ jobs:
       with:
         failOnStdErr: false
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
-        template: deploy/main.bicep
-        parameters: >
-          environmentType=${{ env.ENVIRONMENT_TYPE }}
+        template: ./Vwan/main.bicep
         additionalArguments: --what-if
 
   deploy:
     runs-on: ubuntu-latest
-    environment: Website
     needs: preview
     outputs:
       appServiceAppHostName: ${{ steps.deploy.outputs.appServiceAppHostName }}
@@ -78,10 +75,10 @@ jobs:
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     - uses: azure/arm-deploy@v1
       id: deploy
-      name: Deploy website
+      name: Deploy Vwan
       with:
         failOnStdErr: false
         deploymentName: ${{ github.run_number }}
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
-        template: ./deploy/main.bicep
-        parameters: environmentType=${{ env.ENVIRONMENT_TYPE }}
+        template: ./Vwan/main.bicep
+        param_file: ./Vwan/uks/vwan-uks.biceparam.json
