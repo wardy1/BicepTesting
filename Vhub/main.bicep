@@ -63,6 +63,7 @@ param virtualWanId string
 
 @description('Optional. Resource ID of the VPN Gateway to link to.')
 param vpnGatewayId string = ''
+
 /* 
 @description('Optional. Route tables to create for the virtual hub.')
 param hubRouteTables array = []
@@ -70,8 +71,8 @@ param hubRouteTables array = []
 @description('Optional. Virtual network connections to create for the virtual hub.')
 param hubVirtualNetworkConnections array = [] */
 
-@description('Optional. The lock settings of the service.')
-param lock lockType
+/* @description('Optional. The lock settings of the service.')
+param lock lockType */
 
 /* @description('Optional. Enable telemetry via a Globally Unique Identifier (GUID).')
 param enableDefaultTelemetry bool = true */
@@ -124,14 +125,14 @@ resource virtualHub 'Microsoft.Network/virtualHubs@2022-11-01' = {
   }
 }
 
-resource virtualHub_lock 'Microsoft.Authorization/locks@2020-05-01' = if (!empty(lock ?? {}) && lock.?kind != 'None') {
+/* resource virtualHub_lock 'Microsoft.Authorization/locks@2020-05-01' = if (!empty(lock ?? {}) && lock.?kind != 'None') {
   name: lock.?name ?? 'lock-${name}'
   properties: {
     level: lock.?kind ?? ''
     notes: lock.?kind == 'CanNotDelete' ? 'Cannot delete resource or child resources.' : 'Cannot delete or modify the resource or child resources.'
   }
   scope: virtualHub
-}
+} */
 /* 
 module virtualHub_routeTables 'hub-route-table/main.bicep' = [for (routeTable, index) in hubRouteTables: {
   name: '${uniqueString(deployment().name, location)}-routeTable-${index}'
