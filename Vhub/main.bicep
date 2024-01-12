@@ -31,7 +31,7 @@ param p2SVpnGatewayId string = ''
   'VpnGateway'
   ''
 ])
-param preferredRoutingGateway string = ''
+param preferredRoutingGateway string
 
 @description('Optional. VirtualHub route tables.')
 param routeTableRoutes array = []

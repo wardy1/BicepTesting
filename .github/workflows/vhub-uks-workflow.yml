@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+    paths:
+        - 'Vhub/*'
 
 permissions:
   id-token: write

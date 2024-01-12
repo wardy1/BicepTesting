@@ -27,9 +27,12 @@
             "value": ""
         },
         "preferredRoutingGateway": {
-            "value": ""
+            "value": "Internet"
         },
         "routeTableRoutes": {
+            "value": []
+        },
+        "siteToSiteConnections": {
             "value": []
         },
         "securityPartnerProviderId": {

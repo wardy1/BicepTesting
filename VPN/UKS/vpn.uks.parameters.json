@@ -1,0 +1,114 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "value": "uksvpngw1"
+    },
+    "gatewayType": {
+      "value": "Vpn"
+    },
+    "vpnType": {
+      "value": "RouteBased"
+    },
+    "skuName": {
+      "value": "VpnGw2AZ"
+    },
+    "vNetResourceId": {
+      "value": ""
+    },
+    "publicIpDiagnosticSettings": {
+      "value": {
+        "name": "PublicIpDiagnosticSettings",
+        "properties": {
+          "storageAccountId": "",
+          "eventHubAuthorizationRuleId": "",
+          "eventHubName": "",
+          "metrics": [
+            {
+              "category": "AllMetrics",
+              "enabled": true,
+              "retentionPolicy": {
+                "enabled": false,
+                "days": 0
+              }
+            }
+          ],
+          "logs": [
+            {
+              "category": "AllLogs",
+              "enabled": true,
+              "retentionPolicy": {
+                "enabled": false,
+                "days": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    "diagnosticSettings": {
+      "value": {
+        "name": "DiagnosticSettings",
+        "properties": {
+          "storageAccountId": "",
+          "eventHubAuthorizationRuleId": "",
+          "eventHubName": "",
+          "metrics": [
+            {
+              "category": "AllMetrics",
+              "enabled": true,
+              "retentionPolicy": {
+                "enabled": false,
+                "days": 0
+              }
+            }
+          ],
+          "logs": [
+            {
+              "category": "AllLogs",
+              "enabled": true,
+              "retentionPolicy": {
+                "enabled": false,
+                "days": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    "roleAssignments": {
+      "value": [
+        {
+          "name": "Network Contributor",
+          "properties": {
+            "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/4d97b98b-1d4f-4787-a291-c67834d212e7",
+            "principalId": ""
+          }
+        },
+        {
+          "name": "Network Contributor",
+          "properties": {
+            "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/4d97b98b-1d4f-4787-a291-c67834d212e7",
+            "principalId": ""
+          }
+        }
+      ]
+    },
+    "lock": {
+      "value": {
+        "name": "lock",
+        "properties": {
+          "level": "CanNotDelete",
+          "notes": "This lock was created by the Azure VPN Gateway deployment."
+        }
+      }
+    },
+    "tags": {
+      "value": {
+        "resourceType": "VPN Gateway",
+        "resourceName": ""
+      }
+    }
+  }
+}

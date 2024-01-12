@@ -71,46 +71,46 @@ param vpnType string = 'RouteBased'
 param vNetResourceId string
 
 @description('Optional. Value to specify if the Gateway should be deployed in active-active or active-passive configuration.')
-param activeActive bool = true
+param activeActive bool
 
 @description('Optional. Value to specify if BGP is enabled or not.')
-param enableBgp bool = true
+param enableBgp bool
 
 @description('Optional. ASN value.')
-param asn int = 65815
+param asn int
 
 @description('Optional. The IP address range from which VPN clients will receive an IP address when connected. Range specified must not overlap with on-premise network.')
-param vpnClientAddressPoolPrefix string = ''
+param vpnClientAddressPoolPrefix string
 
 @description('Optional. Configures this gateway to accept traffic from remote Virtual WAN networks.')
-param allowVirtualWanTraffic bool = false
+param allowVirtualWanTraffic bool
 
 @description('Optional. Configure this gateway to accept traffic from other Azure Virtual Networks. This configuration does not support connectivity to Azure Virtual WAN.')
-param allowRemoteVnetTraffic bool = false
+param allowRemoteVnetTraffic bool
 
 @description('Optional. disableIPSecReplayProtection flag. Used for VPN Gateways.')
-param disableIPSecReplayProtection bool = false
+param disableIPSecReplayProtection bool
 
 @description('Optional. Whether DNS forwarding is enabled or not and is only supported for Express Route Gateways. The DNS forwarding feature flag must be enabled on the current subscription.')
-param enableDnsForwarding bool = false
+param enableDnsForwarding bool
 
 @description('Optional. Whether private IP needs to be enabled on this gateway for connections or not. Used for configuring a Site-to-Site VPN connection over ExpressRoute private peering.')
-param enablePrivateIpAddress bool = false
+param enablePrivateIpAddress bool
 
 @description('Optional. The reference to the LocalNetworkGateway resource which represents local network site having default routes. Assign Null value in case of removing existing default site setting.')
-param gatewayDefaultSiteLocalNetworkGatewayId string = ''
+param gatewayDefaultSiteLocalNetworkGatewayId string
 
 @description('Optional. NatRules for virtual network gateway. NAT is supported on the the following SKUs: VpnGw2~5, VpnGw2AZ~5AZ and is supported for IPsec/IKE cross-premises connections only.')
-param natRules array = []
+param natRules array
 
 @description('Optional. EnableBgpRouteTranslationForNat flag. Can only be used when "natRules" are enabled on the Virtual Network Gateway.')
-param enableBgpRouteTranslationForNat bool = false
+param enableBgpRouteTranslationForNat bool
 
 @description('Optional. Client root certificate data used to authenticate VPN clients. Cannot be configured if vpnClientAadConfiguration is provided.')
-param clientRootCertData string = ''
+param clientRootCertData string
 
 @description('Optional. Thumbprint of the revoked certificate. This would revoke VPN client certificates matching this thumbprint from connecting to the VNet.')
-param clientRevokedCertThumbprint string = ''
+param clientRevokedCertThumbprint string
 
 @description('Optional. The diagnostic settings of the Public IP.')
 param publicIpDiagnosticSettings diagnosticSettingType
@@ -128,10 +128,10 @@ param lock lockType
 param tags object?
 
 @description('Optional. Enable telemetry via a Globally Unique Identifier (GUID).')
-param enableDefaultTelemetry bool = true
+param enableDefaultTelemetry bool
 
 @description('Optional. Configuration for AAD Authentication for P2S Tunnel Type, Cannot be configured if clientRootCertData is provided.')
-param vpnClientAadConfiguration object = {}
+param vpnClientAadConfiguration object
 
 // ================//
 // Variables       //
