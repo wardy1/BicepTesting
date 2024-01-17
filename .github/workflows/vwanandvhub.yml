@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - 'Vwan/*'
+      - '.github/workflows/vwanandhub.yml'
 
 permissions:
   id-token: write
