@@ -52,6 +52,15 @@
         },
         "virtualWanId": {
             "value": "/subscriptions/5e0b33cf-2cfb-487b-ac44-f9877e08edb8/resourceGroups/rg-vwantest/providers/Microsoft.Network/virtualWans/uksvwan1"
+        },
+        "vpnSitePublicIPAddress": {
+            "value": "207.88.33.12"
+        },
+        "vpnSiteBgpAsn": {
+            "value": 65515
+        },
+        "vpnSiteBgpPeeringAddress": {
+            "value": "10.50.0.0/24"
         }
     }
 }
