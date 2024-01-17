@@ -70,6 +70,9 @@
         },
         "Policyname": {
             "value": "policyuks"
+        },
+        "Firewallname": {
+            "value": "firewalluks"
         }
     }
 }
