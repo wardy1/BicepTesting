@@ -64,6 +64,9 @@
         },
         "vpnSiteName": {
             "value": "sitea"
+        },
+        "vpnGatewayName": {
+            "value": "VPNGW1"
         }
     }
 }
