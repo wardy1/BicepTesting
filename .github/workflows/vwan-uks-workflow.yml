@@ -38,7 +38,7 @@ jobs:
     - uses: azure/arm-deploy@v1
       name: Run preflight validation
       with:
-        scope: ${{ env.AZURE_RESOURCEGROUP_NAME }}
+        scope: resourcegroup
         deploymentName: ${{ github.run_number }}
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
         template: ./Vwan/main.bicep
@@ -59,7 +59,7 @@ jobs:
     - uses: azure/arm-deploy@v1
       name: Run what-if
       with:
-        scope: ${{ env.AZURE_RESOURCEGROUP_NAME }}
+        scope: resourcegroup
         failOnStdErr: false
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
         template: ./Vwan/main.bicep
@@ -81,7 +81,7 @@ jobs:
       id: deploy-Vwan
       name: Deploy Vwan
       with:
-        scope: ${{ env.AZURE_RESOURCEGROUP_NAME }}
+        scope: resourcegroup
         failOnStdErr: false
         deploymentName: ${{ github.run_number }}
         resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
@@ -103,7 +103,7 @@ jobs:
       id: deploy-Vwan
       name: Deploy Vwan
       with:
-              scope: ${{ env.AZURE_RESOURCEGROUP_NAME }}
+              scope: resourcegroup
               failOnStdErr: false
               deploymentName: ${{ github.run_number }}
               resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
