@@ -109,5 +109,26 @@ jobs:
               template: ./Vhub/main.bicep
               parameters: ./Vhub/UKS/vhub-uks.bicepparam.json
   
+  deploy-Vhub-ukw:
+    runs-on: ubuntu-latest
+    needs: deploy-Vwan
+    steps:
+    - uses: actions/checkout@v3
+    - uses: azure/login@v1
+      name: Sign in to Azure
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    - uses: azure/arm-deploy@v1
+      id: deploy-Vhub-ukw
+      name: Deploy Vhub UKW
+      with:
+              scope: resourcegroup
+              failOnStdErr: false
+              deploymentName: ${{ github.run_number }}
+              resourceGroupName: ${{ env.AZURE_RESOURCEGROUP_NAME }}
+              template: ./Vhub/main.bicep
+              parameters: ./Vhub/UKW/vhub-ukw.bicepparam.json
       
         
