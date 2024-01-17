@@ -1,4 +1,4 @@
-name: deploy-vwan-uks
+name: deploy-vwanandhub
 concurrency: vwan-uks
 
 on:
