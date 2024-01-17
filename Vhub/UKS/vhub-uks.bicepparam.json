@@ -68,7 +68,7 @@
         "vpnGatewayName": {
             "value": "VPNGW1"
         },
-        "PolicyName": {
+        "Policyname": {
             "value": "policyuks"
         }
     }
