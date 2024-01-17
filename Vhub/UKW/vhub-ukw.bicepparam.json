@@ -51,7 +51,7 @@
             "value": []
         },
         "virtualWanId": {
-            "value": "/subscriptions/5e0b33cf-2cfb-487b-ac44-f9877e08edb8/resourceGroups/rg-vwantest-ukw-1/providers/Microsoft.Network/virtualWans/ukwvwan1"
+            "value": "/subscriptions/5e0b33cf-2cfb-487b-ac44-f9877e08edb8/resourceGroups/rg-vwantest/providers/Microsoft.Network/virtualWans/uksvwan1"
         }
     }
 }

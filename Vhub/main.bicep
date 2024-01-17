@@ -64,6 +64,30 @@ param virtualWanId string
 @description('Optional. Resource ID of the VPN Gateway to link to.')
 param vpnGatewayId string = ''
 
+@description('Name of the VPN Gateway. A VPN Gateway is created inside a virtual hub.')
+param vpnGatewayName string = 'SampleVpnGateway'
+
+@description('Name of the vpnsite. A vpnsite represents the on-premise vpn device. A public ip address is mandatory for a VPN Site creation.')
+param vpnSiteName string = 'SampleVpnSite'
+
+@description('Name of the vpnconnection. A vpn connection is established between a vpnsite and a VPN Gateway.')
+param connectionName string = 'SampleVpnsiteVpnGwConnection'
+
+@description('A list of static routes corresponding to the VPN Gateway. These are configured on the VPN Gateway. Mandatory if BGP is disabled.')
+param vpnSiteAddressspaceList array = [ '10.10.0.0/24' ]
+
+@description('The public IP address of a VPN Site.')
+param vpnSitePublicIPAddress string
+
+@description('The BGP ASN number of a VPN Site. Unused if BGP is disabled.')
+param vpnSiteBgpAsn int
+
+@description('The BGP peer IP address of a VPN Site. Unused if BGP is disabled.')
+param vpnSiteBgpPeeringAddress string
+
+@description('This needs to be set to true if BGP needs to enabled on the VPN connection.')
+param enableBgp bool = false
+
 /* 
 @description('Optional. Route tables to create for the virtual hub.')
 param hubRouteTables array = []
@@ -122,6 +146,208 @@ resource virtualHub 'Microsoft.Network/virtualHubs@2022-11-01' = {
     vpnGateway: !empty(vpnGatewayId) ? {
       id: vpnGatewayId
     } : null
+  }
+}
+
+resource vpnSite 'Microsoft.Network/vpnSites@2021-03-01' = {
+  name: vpnSiteName
+  location: location
+  properties: {
+    addressSpace: {
+      addressPrefixes: vpnSiteAddressspaceList
+    }
+    bgpProperties: (enableBgp ? {
+      asn: vpnSiteBgpAsn
+      bgpPeeringAddress: vpnSiteBgpPeeringAddress
+      peerWeight: 0
+    } : null)
+    deviceProperties: {
+      linkSpeedInMbps: 10
+    }
+    ipAddress: vpnSitePublicIPAddress
+    virtualWan: {
+      id: virtualWanId
+    }
+  }
+}
+
+resource vpnGateway 'Microsoft.Network/vpnGateways@2021-03-01' = {
+  name: vpnGatewayName
+  location: location
+  properties: {
+    connections: [
+      {
+        name: connectionName
+        properties: {
+          connectionBandwidth: 10
+          enableBgp: enableBgp
+          remoteVpnSite: {
+            id: vpnSite.id
+          }
+        }
+      }
+    ]
+    virtualHub: {
+      id: virtualHub.id
+    }
+    bgpSettings: {
+      asn: 65515
+    }
+  }
+}
+
+resource policy 'Microsoft.Network/firewallPolicies@2021-08-01' = {
+  name: 'Policy-01'
+  location: location
+  properties: {
+    threatIntelMode: 'Alert'
+  }
+}
+
+resource ruleCollectionGroup 'Microsoft.Network/firewallPolicies/ruleCollectionGroups@2021-08-01' = {
+  parent: policy
+  name: 'DefaultApplicationRuleCollectionGroup'
+  properties: {
+    priority: 300
+    ruleCollections: [
+      {
+        ruleCollectionType: 'FirewallPolicyFilterRuleCollection'
+        name: 'RC-01'
+        priority: 100
+        action: {
+          type: 'Allow'
+        }
+        rules: [
+          {
+            ruleType: 'ApplicationRule'
+            name: 'Allow-msft'
+            sourceAddresses: [
+              '*'
+            ]
+            protocols: [
+              {
+                port: 80
+                protocolType: 'Http'
+              }
+              {
+                port: 443
+                protocolType: 'Https'
+              }
+            ]
+            targetFqdns: [
+              '*.microsoft.com'
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+resource firewall 'Microsoft.Network/azureFirewalls@2021-08-01' = {
+  name: 'AzfwTest'
+  location: location
+  properties: {
+    sku: {
+      name: 'AZFW_Hub'
+      tier: 'Standard'
+    }
+    hubIPAddresses: {
+      publicIPs: {
+        count: 1
+      }
+    }
+    virtualHub: {
+      id: virtualHub.id
+    }
+    firewallPolicy: {
+      id: policy.id
+    }
+  }
+}
+
+resource hubVNetconnection 'Microsoft.Network/virtualHubs/hubVirtualNetworkConnections@2021-08-01' = {
+  parent: virtualHub
+  name: 'hub-spoke'
+  dependsOn: [
+    firewall
+  ]
+  properties: {
+    remoteVirtualNetwork: {
+      id: virtualNetwork.id
+    }
+    allowHubToRemoteVnetTransit: true
+    allowRemoteVnetToUseHubVnetGateways: false
+    enableInternetSecurity: true
+    routingConfiguration: {
+      associatedRouteTable: {
+        id: hubRouteTable.id
+      }
+      propagatedRouteTables: {
+        labels: [
+          'VNet'
+        ]
+        ids: [
+          {
+            id: hubRouteTable.id
+          }
+        ]
+      }
+    }
+  }
+}
+
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-08-01' = {
+  name: 'Spoke-01'
+  location: location
+  properties: {
+    addressSpace: {
+      addressPrefixes: [
+        '10.100.0.0/23'
+      ]
+    }
+    enableDdosProtection: false
+    enableVmProtection: false
+  }
+}
+
+resource subnet_Workload_SN 'Microsoft.Network/virtualNetworks/subnets@2021-08-01' = {
+  parent: virtualNetwork
+  name: 'Workload-SN'
+  properties: {
+    addressPrefix: '10.100.1.0/24'
+    privateEndpointNetworkPolicies: 'Enabled'
+    privateLinkServiceNetworkPolicies: 'Enabled'
+  }
+}
+
+resource hubRouteTable 'Microsoft.Network/virtualHubs/hubRouteTables@2021-08-01' = {
+  parent: virtualHub
+  name: 'RT_VNet'
+  properties: {
+    routes: [
+      {
+        name: 'Workload-SNToFirewall'
+        destinationType: 'CIDR'
+        destinations: [
+          '10.0.1.0/24'
+        ]
+        nextHopType: 'ResourceId'
+        nextHop: firewall.id
+      }
+      {
+        name: 'InternetToFirewall'
+        destinationType: 'CIDR'
+        destinations: [
+          '0.0.0.0/0'
+        ]
+        nextHopType: 'ResourceId'
+        nextHop: firewall.id
+      }
+    ]
+    labels: [
+      'VNet'
+    ]
   }
 }
 
