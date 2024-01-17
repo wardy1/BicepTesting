@@ -88,6 +88,8 @@ param vpnSiteBgpPeeringAddress string
 @description('This needs to be set to true if BGP needs to enabled on the VPN connection.')
 param enableBgp bool = false
 
+param Policyname string
+
 /* 
 @description('Optional. Route tables to create for the virtual hub.')
 param hubRouteTables array = []
@@ -197,7 +199,7 @@ resource vpnGateway 'Microsoft.Network/vpnGateways@2021-03-01' = {
 }
 
 resource policy 'Microsoft.Network/firewallPolicies@2021-08-01' = {
-  name: 'Policy-01'
+  name: Policyname
   location: location
   properties: {
     threatIntelMode: 'Alert'
