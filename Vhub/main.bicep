@@ -68,7 +68,7 @@ param vpnGatewayId string = ''
 param vpnGatewayName string = 'SampleVpnGateway'
 
 @description('Name of the vpnsite. A vpnsite represents the on-premise vpn device. A public ip address is mandatory for a VPN Site creation.')
-param vpnSiteName string = 'SampleVpnSite'
+param vpnSiteName string
 
 @description('Name of the vpnconnection. A vpn connection is established between a vpnsite and a VPN Gateway.')
 param connectionName string = 'SampleVpnsiteVpnGwConnection'
