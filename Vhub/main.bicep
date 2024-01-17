@@ -65,7 +65,7 @@ param virtualWanId string
 param vpnGatewayId string = ''
 
 @description('Name of the VPN Gateway. A VPN Gateway is created inside a virtual hub.')
-param vpnGatewayName string = 'SampleVpnGateway'
+param vpnGatewayName string
 
 @description('Name of the vpnsite. A vpnsite represents the on-premise vpn device. A public ip address is mandatory for a VPN Site creation.')
 param vpnSiteName string
