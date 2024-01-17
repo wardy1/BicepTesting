@@ -71,7 +71,7 @@ param vpnGatewayName string
 param vpnSiteName string
 
 @description('Name of the vpnconnection. A vpn connection is established between a vpnsite and a VPN Gateway.')
-param connectionName string = 'SampleVpnsiteVpnGwConnection'
+param connectionName string
 
 @description('A list of static routes corresponding to the VPN Gateway. These are configured on the VPN Gateway. Mandatory if BGP is disabled.')
 param vpnSiteAddressspaceList array = [ '10.10.0.0/24' ]
@@ -89,6 +89,8 @@ param vpnSiteBgpPeeringAddress string
 param enableBgp bool = false
 
 param Policyname string
+
+param fwname string
 
 /* 
 @description('Optional. Route tables to create for the virtual hub.')
@@ -247,7 +249,7 @@ resource ruleCollectionGroup 'Microsoft.Network/firewallPolicies/ruleCollectionG
 }
 
 resource firewall 'Microsoft.Network/azureFirewalls@2021-08-01' = {
-  name: 'AzfwTest'
+  name: fwname
   location: location
   properties: {
     sku: {
