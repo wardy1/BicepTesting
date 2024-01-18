@@ -76,6 +76,12 @@
         },
         "fwname": {
             "value": "fwuks"
+        },
+        "spokenetworkname": {
+            "value": "spokeuks"
+        },
+        "hubspokename": {
+            "value": "hubspokeuks"
         }
     }
 }

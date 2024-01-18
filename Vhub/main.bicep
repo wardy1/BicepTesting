@@ -92,6 +92,10 @@ param Policyname string
 
 param fwname string
 
+param spokenetworkname string
+
+param hubspokename string
+
 /* 
 @description('Optional. Route tables to create for the virtual hub.')
 param hubRouteTables array = []
@@ -272,7 +276,7 @@ resource firewall 'Microsoft.Network/azureFirewalls@2021-08-01' = {
 
 resource hubVNetconnection 'Microsoft.Network/virtualHubs/hubVirtualNetworkConnections@2021-08-01' = {
   parent: virtualHub
-  name: 'hub-spoke'
+  name: hubspokename
   dependsOn: [
     firewall
   ]
@@ -302,7 +306,7 @@ resource hubVNetconnection 'Microsoft.Network/virtualHubs/hubVirtualNetworkConne
 }
 
 resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-08-01' = {
-  name: 'Spoke-01'
+  name: spokenetworkname
   location: location
   properties: {
     addressSpace: {
