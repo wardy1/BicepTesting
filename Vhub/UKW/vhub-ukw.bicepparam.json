@@ -71,9 +71,6 @@
         "Policyname": {
             "value": "policyukw"
         },
-        "Firewallname": {
-            "value": "firewallukw"
-        },
         "connectionName": {
             "value": "connectionukw"
         },
