@@ -73,6 +73,12 @@
         },
         "Firewallname": {
             "value": "firewalluks"
+        },
+        "connectionName": {
+            "value": "connectionuks"
+        },
+        "fwname": {
+            "value": "fwuks"
         }
     }
 }
