@@ -111,7 +111,7 @@ jobs:
   
   deploy-Vhub-ukw:
     runs-on: ubuntu-latest
-    needs: deploy-Vwan
+    needs: deploy-Vhub-uks
     steps:
     - uses: actions/checkout@v3
     - uses: azure/login@v1
