@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 env:
-  AZURE_RESOURCEGROUP_NAME: rg-vwantest
+  AZURE_RESOURCEGROUP_NAME: rg-vwantest-man-uks-1
   ENVIRONMENT_TYPE: Production
 
 jobs:

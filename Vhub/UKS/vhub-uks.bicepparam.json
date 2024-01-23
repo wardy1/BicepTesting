@@ -51,7 +51,7 @@
             "value": []
         },
         "virtualWanId": {
-            "value": "/subscriptions/5e0b33cf-2cfb-487b-ac44-f9877e08edb8/resourceGroups/rg-vwantest/providers/Microsoft.Network/virtualWans/uksvwan1"
+            "value": "/subscriptions/f79a69b8-c7e7-413d-82c9-c7a111fc04b5/resourceGroups/rg-vwantest-man-uks-1/providers/Microsoft.Network/virtualWans/uksvwan1"
         },
         "vpnSitePublicIPAddress": {
             "value": "207.88.33.11"
