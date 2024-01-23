@@ -15,7 +15,7 @@
             }
         },
         "addressPrefix": {
-            "value": "10.100.10.0/24"
+            "value": "10.10.10.0/24"
         },
         "allowBranchToBranchTraffic": {
             "value": true
