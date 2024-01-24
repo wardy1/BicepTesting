@@ -36,7 +36,7 @@
             "value": ""
         },
         "securityProviderName": {
-            "value": ""
+            "value": "Fortinet"
         },
         "sku": {
             "value": "Standard"
@@ -88,6 +88,9 @@
         },
         "workloadsubnetaddressspace": {
             "value": "10.1.1.0/24"
+        },
+        "asnnumber": {
+            "value": 65202
         }
     }
 }
