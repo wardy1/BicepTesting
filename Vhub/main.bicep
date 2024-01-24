@@ -100,6 +100,8 @@ param vnetaddressspace string
 
 param workloadsubnetaddressspace string
 
+param asnnumber string
+
 /* 
 @description('Optional. Route tables to create for the virtual hub.')
 param hubRouteTables array = []
@@ -174,7 +176,7 @@ resource vpnSite 'Microsoft.Network/vpnSites@2021-03-01' = {
       peerWeight: 0
     } : null)
     deviceProperties: {
-      linkSpeedInMbps: 10
+      linkSpeedInMbps: 1000
     }
     ipAddress: vpnSitePublicIPAddress
     virtualWan: {
@@ -191,7 +193,7 @@ resource vpnGateway 'Microsoft.Network/vpnGateways@2021-03-01' = {
       {
         name: connectionName
         properties: {
-          connectionBandwidth: 10
+          connectionBandwidth: 1000
           enableBgp: enableBgp
           remoteVpnSite: {
             id: vpnSite.id
@@ -203,7 +205,7 @@ resource vpnGateway 'Microsoft.Network/vpnGateways@2021-03-01' = {
       id: virtualHub.id
     }
     bgpSettings: {
-      asn: 65515
+      asn: asnnumber
     }
   }
 }
