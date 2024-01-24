@@ -82,6 +82,12 @@
         },
         "hubspokename": {
             "value": "hubspokeuks"
+        },
+        "vnetaddressspace": {
+            "value": "10.100.0.0/23"
+        },
+        "workloadsubnetaddressspace": {
+            "value": "10.100.1.0/24"
         }
     }
 }

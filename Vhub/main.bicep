@@ -96,6 +96,10 @@ param spokenetworkname string
 
 param hubspokename string
 
+param vnetaddressspace string
+
+param workloadsubnetaddressspace string
+
 /* 
 @description('Optional. Route tables to create for the virtual hub.')
 param hubRouteTables array = []
@@ -311,7 +315,7 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2021-08-01' = {
   properties: {
     addressSpace: {
       addressPrefixes: [
-        '10.100.0.0/23'
+        vnetaddressspace
       ]
     }
     enableDdosProtection: false
@@ -323,7 +327,7 @@ resource subnet_Workload_SN 'Microsoft.Network/virtualNetworks/subnets@2021-08-0
   parent: virtualNetwork
   name: 'Workload-SN'
   properties: {
-    addressPrefix: '10.100.1.0/24'
+    addressPrefix: workloadsubnetaddressspace
     privateEndpointNetworkPolicies: 'Enabled'
     privateLinkServiceNetworkPolicies: 'Enabled'
   }
@@ -338,7 +342,7 @@ resource hubRouteTable 'Microsoft.Network/virtualHubs/hubRouteTables@2021-08-01'
         name: 'Workload-SNToFirewall'
         destinationType: 'CIDR'
         destinations: [
-          '10.0.1.0/24'
+          '0.0.0.0/0'
         ]
         nextHopType: 'ResourceId'
         nextHop: firewall.id
