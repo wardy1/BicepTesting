@@ -339,7 +339,7 @@ resource hubRouteTable 'Microsoft.Network/virtualHubs/hubRouteTables@2021-08-01'
   properties: {
     routes: [
       {
-        name: 'Workload-SNToFirewall'
+        name: 'AllToFirewall'
         destinationType: 'CIDR'
         destinations: [
           '0.0.0.0/0'
@@ -347,15 +347,7 @@ resource hubRouteTable 'Microsoft.Network/virtualHubs/hubRouteTables@2021-08-01'
         nextHopType: 'ResourceId'
         nextHop: firewall.id
       }
-      {
-        name: 'InternetToFirewall'
-        destinationType: 'CIDR'
-        destinations: [
-          '0.0.0.0/0'
-        ]
-        nextHopType: 'ResourceId'
-        nextHop: firewall.id
-      }
+
     ]
     labels: [
       'VNet'
