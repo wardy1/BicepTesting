@@ -100,8 +100,6 @@ param vnetaddressspace string
 
 param workloadsubnetaddressspace string
 
-param asnnumber string
-
 /* 
 @description('Optional. Route tables to create for the virtual hub.')
 param hubRouteTables array = []
@@ -205,7 +203,7 @@ resource vpnGateway 'Microsoft.Network/vpnGateways@2021-03-01' = {
       id: virtualHub.id
     }
     bgpSettings: {
-      asn: asnnumber
+      asn: 65515
     }
   }
 }

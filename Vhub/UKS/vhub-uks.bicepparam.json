@@ -88,9 +88,6 @@
         },
         "workloadsubnetaddressspace": {
             "value": "10.100.1.0/24"
-        },
-        "asnnumber": {
-            "value": 65202
         }
     }
 }
