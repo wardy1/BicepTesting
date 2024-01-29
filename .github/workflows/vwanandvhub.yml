@@ -16,11 +16,20 @@ env:
   ENVIRONMENT_TYPE: Production
 
 jobs:
-  lint:
+  bicep-linter:
+    name: Bicep
     runs-on: ubuntu-latest
     steps:
-    - name: Bicep Linter
-      uses: synergy-au/bicep-lint-action@v1.1
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          # Incremental diffs require fetch depth to be at 0 to grab the target branch
+          fetch-depth: "0"
+      - name: Run Bicep Linter
+        uses: synergy-au/bicep-lint-action@v1
+        with:
+          analyse-all-files: "true" # optional, defaults to false (only analyse changed files)
+          bicep-version: "latest" # optional, defaults to latest1
 
   validate:
     runs-on: ubuntu-latest
