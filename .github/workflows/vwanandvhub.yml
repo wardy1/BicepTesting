@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Bicep Linter
-      uses: synergy-au/bicep-lint-action@v1.
+      uses: synergy-au/bicep-lint-action@v1.1
 
   validate:
     runs-on: ubuntu-latest
